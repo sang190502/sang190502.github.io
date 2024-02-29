@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bình chọn bài thi</title>
+  <!-- Link tới Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Tùy chỉnh kiểu cho trang của bạn */
+    body {
+      padding-top: 70px; /* Để dành không gian cho header */
+      background-color: #fefae0;
+    }
+
+    .container {
+      margin-bottom: 30px;
+    }
+
+   a {
+    color: #000000;
+    font-size: 20px;
+   }
+
+    .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+
+        .hero-section h1 {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .hero-section img {
+            max-width: 50%;
+            height: auto;
+            margin-left: 50px;
+        }
+
+
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+    }
+  
+    .hero-heading {
+      font-size: 3em;
+      font-weight: bold;
+    }
+    .vote-button {
+      width: 100%;
+    }
+
+    .footer {
+      margin-top: 24px;
+    }
+
+    .other-contests {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #ddd;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: none; /* ẩn thanh cuộn trên Firefox */
+            -ms-overflow-style: none; /* ẩn thanh cuộn trên IE */
+        }
+
+        .slide {
+            flex: 0 0 auto;
+            width: 300px;
+            height: 400px;
+            margin-right: 20px;
+            border-radius: 10px;
+            overflow: scroll;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide::-webkit-scrollbar {
+            display: none; /* ẩn thanh cuộn trên Chrome, Safari, Opera */
+        }
+
+
+        .prizes {
+          background-color: white;
+          padding: 16px;
+          width: 1200px;
+        }
+
+        .footer {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px 0;
+    text-align: center;
+    height: 100px;
+}
+
+.social-icons a {
+    color: #000000;
+    margin: 0 10px;
+    font-size: 24px;
+}
+
+.social-icons a:hover {
+    color: #3b5998; /* Màu của Facebook */
+}
+
+.social-icons a:hover {
+    color: #ff0000; /* Màu của YouTube */
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 400px; /* Điều chỉnh chiều rộng */
+    max-width: 80%; 
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding: 60px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    font-size: 18px;
+    text-align: center; /* Căn giữa nội dung */
+
+}
+
+.tick-icon {
+    color: #00ff00; /* Màu xanh */
+}
+
+
+.overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.fb-login {
+  background-color: white;
+  position: absolute;
+  top: 100px;
+
+}
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <nav class="navbar navbar-expand-lg  bg-white fixed-top">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        <img src="https://i.ibb.co/0rw8jxP/logo.png" alt="Logo" style="width: 60px;">
+      </a>
+      <!-- Nút responsive -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Menu -->
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Trang chủ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Giới thiệu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Bài thi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Liên hệ</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Nội dung trang -->
+  <div class="container">
+
+  
+    <div class="hero-section">
+      <div class="hero-content">
+          <h1>Tham Gia Cuộc Thi Bình Chọn Bài Viết Chữ Đẹp</h1>
+          <p>Hãy đắm chìm trong thế giới của chữ viết đẹp - nơi mà nghệ thuật và từ vựng hòa quyện tạo nên những tác phẩm tuyệt vời. Cuộc thi bình chọn bài viết chữ đẹp là sân chơi dành cho những người yêu thích văn hóa viết, từ người mới bắt đầu đến những chuyên gia.</p>
+          
+          <p>Hãy để tài năng và sự cống hiến của bạn trở thành nguồn động viên cho các nghệ sĩ viết, và cùng chia sẻ niềm đam mê với cộng đồng toàn cầu!</p>
+      </div>
+      <img src="https://vov2-media.solidtech.vn/sites/default/files/styles/large/public/2023-08/net-chu-net-nguoi.png" alt="Chữ đẹp">
+  </div>
+
+    <h1 class="mt-5">Danh sách bài thi</h1>
+    <div class="row mt-3" id="card-container">
+      <!-- Các cards sẽ được thêm vào đây bằng JavaScript -->
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Bài thi số 1</h5>
+            <img src="https://i.ibb.co/CK35ZzY/01.jpg" class="card-img-top thumbnail" alt="Ảnh mẫu">
+            <button class="btn btn-primary vote-button mt-3">Bình chọn</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Bài thi số 2</h5>
+            <img src="https://i.ibb.co/CvS3741/02.jpg" class="card-img-top thumbnail" alt="Ảnh mẫu">
+
+            <button class="btn btn-primary vote-button mt-3">Bình chọn</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Bài thi số 3</h5>
+            <img src="https://i.ibb.co/7JgkBDX/03.jpg" class="card-img-top thumbnail" alt="Ảnh mẫu">
+
+            <button class="btn btn-primary vote-button mt-3">Bình chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Bài thi số 4</h5>
+            <img src="https://i.ibb.co/hHr5XJ1/04.jpg" class="card-img-top thumbnail" alt="Ảnh mẫu">
+
+            <button class="btn btn-primary vote-button mt-3">Bình chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Bài thi số 5</h5>
+            <img src="https://i.ibb.co/vP6Ddr9/05.png" class="card-img-top thumbnail" alt="Ảnh mẫu">
+
+            <button class="btn btn-primary vote-button mt-3">Bình chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Bài thi số 6</h5>
+            <img src="https://i.ibb.co/BVjFzqh/06.jpg" class="card-img-top thumbnail" alt="Ảnh mẫu">
+
+            <button class="btn btn-primary vote-button mt-3">Bình chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Bài thi số 7</h5>
+            <img src="https://i.ibb.co/tDYpxqv/07.png" class="card-img-top thumbnail" alt="Ảnh mẫu">
+
+            <button class="btn btn-primary vote-button mt-3">Bình chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Bài thi số 8</h5>
+            <img src="https://i.ibb.co/PDj6qT1/08.jpg" class="card-img-top thumbnail" alt="Ảnh mẫu">
+
+            <button class="btn btn-primary vote-button mt-3">Bình chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Bài thi số 9</h5>
+            <img src="https://i.ibb.co/Ksx6hqj/09.jpg" class="card-img-top thumbnail" alt="Ảnh mẫu">
+
+            <button class="btn btn-primary vote-button mt-3">Bình chọn</button>
+          </div>
+        </div>
+      </div>
+
+
+     
+      <div class="prizes">
+        <h2>Giải Thưởng</h2>
+        <ul>
+            <li><strong>01 Giải Nhất:</strong> Giấy chứng nhận + 15.000.000đ + quà tặng.</li>
+            <li><strong>01 Giải Nhì:</strong> Giấy chứng nhận + 5.000.000đ + quà tặng.</li>
+            <li><strong>02 Giải Ba:</strong> Giấy chứng nhận + 3.000.000đ + quà tặng.</li>
+            <li><strong>3 Giải Khuyến khích:</strong> Giấy chứng nhận + 1.000.000đ + quà tặng.</li>
+        </ul>
+    </div>
+
+
+        
+      <div class="other-contests">
+        <h2>Một số hình ảnh nổi bật</h2>
+        <div class="slide-container">
+            <div class="slide"><img src="https://static.tuoitre.vn/tto/i/s626/2013/11/29/jsDPgGQh.jpg" alt="Cuộc Thi 1"></div>
+            <div class="slide"><img src="https://ttol.vietnamnetjsc.vn/images/2019/01/24/15/11/tv1-2127192.jpg" alt="Cuộc Thi 1"></div>
+            <div class="slide"><img src="https://lequydonhanoi.edu.vn/upload_images/Nam%20hoc%201415/img126.jpg" alt="Cuộc Thi 1"></div>
+            <div class="slide"><img src="https://lequydonhanoi.edu.vn/upload_images/Nam%20hoc%201415/img118.jpg" alt="Cuộc Thi 1"></div>
+            <div class="slide"><img src="https://lequydonhanoi.edu.vn/upload_images/Nam%20hoc%201415/img130.jpg" alt="Cuộc Thi 1"></div>
+            <div class="slide"><img src="https://thvanyen.thainguyen.edu.vn/upload/48616/fck/files/z3354677930558_eb0d8d5bf08eebad7074c488e864aaa5.jpg" alt="Cuộc Thi 1"></div>
+  
+            <!-- Thêm các ảnh của các cuộc thi khác vào đây -->
+        </div>
+    </div>
+
+   
+  </div>
+    
+
+
+  </div>
+
+
+
+  <!-- Link tới Bootstrap JavaScript, sử dụng Popper.js và jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+        // Lấy tất cả các phần tử có class là 'voteButton'
+        var voteButtons = document.querySelectorAll('.vote-button');
+
+        // Lặp qua từng nút và thêm sự kiện click cho mỗi nút
+         // Lặp qua từng nút và thêm sự kiện click cho mỗi nút
+         voteButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                // Tạo một div chứa thông báo và biểu tượng tick
+                var popup = document.createElement("div");
+                popup.classList.add("alert", "alert-success", "popup");
+                popup.setAttribute("role", "alert");
+
+                // Tạo biểu tượng tick
+                var icon = document.createElement("i");
+                icon.classList.add("fas", "fa-check", "mr-2");
+
+                // Tạo nội dung thông báo
+
+                var message = document.createTextNode("Bình chọn bài dự thi thành công ! Cảm ơn bạn đã bình chọn");
+
+                // Thêm biểu tượng và thông báo vào popup
+                popup.appendChild(icon);
+                popup.appendChild(message);
+
+                // Thêm popup vào body của trang
+                document.body.appendChild(popup);
+
+                // Xóa popup sau 3 giây
+                setTimeout(function() {
+                    document.body.removeChild(popup);
+                }, 3000);
+            });
+        });
+    
+</script>
+
+
+  
+</body>
+</html>
